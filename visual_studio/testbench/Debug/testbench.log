@@ -1,0 +1,61 @@
+﻿  testbench.cpp
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(58): error C2244: 'ReadPackage': unable to match function definition to an existing declaration
+  c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(57): note: see declaration of 'ReadPackage'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(237): error C2660: 'DlgRun::ReadPackage': function does not take 1 arguments
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(252): error C2660: 'DlgRun::ReadPackage': function does not take 1 arguments
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(270): error C2660: 'DlgRun::ReadPackage': function does not take 1 arguments
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(355): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(358): warning C4302: 'type cast': truncation from 'void (__cdecl *)(void)' to 'char'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(360): error C2065: 'ID': undeclared identifier
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(363): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(365): error C2065: 'cSerial': undeclared identifier
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(365): error C3861: 'Make_CRC_Send': identifier not found
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2589: 'constant': illegal token on right side of '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): warning C4091: '': ignored on left of 'void' when no variable is declared
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2143: syntax error: missing ';' before '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2059: syntax error: '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2143: syntax error: missing ';' before '{'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(369): error C2447: '{': missing function header (old-style formal list?)
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(388): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(392): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(396): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(400): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(404): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(408): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(412): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(416): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(420): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(424): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(428): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(432): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2589: 'constant': illegal token on right side of '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): warning C4091: '': ignored on left of 'void' when no variable is declared
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2143: syntax error: missing ';' before '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2059: syntax error: '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2143: syntax error: missing ';' before '{'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(436): error C2447: '{': missing function header (old-style formal list?)
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(440): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(444): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(448): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(452): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(456): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(460): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(464): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(468): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(472): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2589: 'constant': illegal token on right side of '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): warning C4091: '': ignored on left of 'void' when no variable is declared
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2143: syntax error: missing ';' before '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2059: syntax error: '::'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2143: syntax error: missing ';' before '{'
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(476): error C2447: '{': missing function header (old-style formal list?)
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(480): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(484): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(488): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(492): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(496): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(500): error C2653: 'DrvFunc': is not a class or namespace name
+c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(504): error C2653: 'DrvFunc': is not a class or namespace name
