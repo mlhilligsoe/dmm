@@ -7,27 +7,32 @@ namespace DMM {
 	class Motor {
 	public:
 		/* Motor parameters */
-		unsigned char ID = id;
-		unsigned char mainGain, speedGain, intGain, torqueConst, speedLimit, accelLimit, posOnRange;
-		unsigned short gearN;
-		unsigned char statusOnRange, statusServoMode, statusAlarm, statusMotion, statusPin2JP3;
-		unsigned char cmdMode, moveMode, servoMode, active;
-		int absPosition, torqueCurrent;
+		unsigned char ID = 127;
+		unsigned char mainGain, speedGain, intGain, torqueConst, speedLimit, accelLimit, posOnRange = 0;
+		unsigned short gearN = 0;
+		unsigned char statusOnRange, statusServoMode, statusAlarm, statusMotion, statusPin2JP3 = 0;
+		unsigned char cmdMode, moveMode, servoMode, active = 0;
+		int absPosition, torqueCurrent = 0;
 
 		/* Read flags */
-		unsigned char ID_readFlag, posOnRange_readFlag;
-		unsigned char mainGain_readFlag, speedGain_readFlag, intGain_readFlag, torqueConst_readFlag, speedLimit_readFlag, accelLimit_readFlag, gearN_readFlag;
-		unsigned char status_readFlag;
-		unsigned char config_readFlag;
-		unsigned char absPosition_readFlag, torqueCurrent_readFlag;
+		unsigned char ID_readFlag, posOnRange_readFlag = 0;
+		unsigned char mainGain_readFlag, speedGain_readFlag, intGain_readFlag, torqueConst_readFlag, speedLimit_readFlag, accelLimit_readFlag, gearN_readFlag = 0;
+		unsigned char status_readFlag = 0;
+		unsigned char config_readFlag = 0;
+		unsigned char absPosition_readFlag, torqueCurrent_readFlag = 0;
+		
+		unsigned char sID;
 
 		/* Constructor */
-		Motor(const unsigned char id);
+		Motor(const unsigned char id, const unsigned char sid);
+		Motor();
+		~Motor();
+
 
 	};
 
 	void sendPackage(unsigned char packageLength, unsigned char B[8]);
-	void readPackages();
+	void readPackages(serial::Serial& cSerial);
 	void interpretPackage(unsigned char packageID, unsigned char packageLength, unsigned char B[8]);
 	unsigned char calcCRC(unsigned char packageLength, unsigned char B[8]);
 	long calcSignedValue(unsigned char packageLength, unsigned char B[8]);
@@ -84,3 +89,7 @@ namespace DMM {
 }
 
 #endif
+
+void pt();
+
+void ptm();

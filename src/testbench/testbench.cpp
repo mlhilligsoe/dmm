@@ -331,7 +331,7 @@ int run(int argc, char **argv)
 
 	while(true){
 
-		DlgRun::ReadMotorPosition32(cSerial); //Motor absolute position stored in Motor_Pos32 variable
+		DMM::ReadMotorPosition32(cSerial); //Motor absolute position stored in Motor_Pos32 variable
 		cout << Motor_Pos32 << endl;
 
 	}

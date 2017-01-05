@@ -55,6 +55,9 @@
 #include <string>
 #include <iostream>
 #include <cstdio>
+#include <ctime>
+#include <chrono>
+#include <map>
 
 #include "serial/serial.h"
 #include "dmm/dmm.h"
@@ -65,29 +68,68 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::vector;
+using std::map;
 
-DMM::Motor::Motor(const unsigned char id) {
+
+/* Serial Communication */
+//serial::Serial cSerial;
+
+
+map<unsigned char, DMM::Motor> motors;
+map<unsigned char, serial::Serial*> serialPts;
+
+//DMM::Motor* motors = new DMM::Motor[3];// = { DMM::Motor(0), DMM::Motor(1), DMM::Motor(2) };
+
+
+DMM::Motor::Motor(unsigned char id, const unsigned char sid) {
 	
+	/* Motor parameters */
+	ID = 127;
+	mainGain = speedGain = intGain = torqueConst = speedLimit = accelLimit = posOnRange = 0;
+	gearN = 0;
+	statusOnRange = statusServoMode = statusAlarm = statusMotion = statusPin2JP3 = 0;
+	cmdMode = moveMode = servoMode = active = 0;
+	absPosition = torqueCurrent = 0;
+
+	/* Read flags */
+	ID_readFlag = posOnRange_readFlag = 0;
+	mainGain_readFlag = speedGain_readFlag = intGain_readFlag = torqueConst_readFlag = speedLimit_readFlag = accelLimit_readFlag = gearN_readFlag = 0;
+	status_readFlag = 0;
+	config_readFlag = 0;
+	absPosition_readFlag = torqueCurrent_readFlag = 0;
+	
+	
+
+
 	ID = id;
+	sID = sid;
+
 }
 
-	/* Serial Communication */
-	serial::Serial cSerial;
+DMM::Motor::Motor()
+{
 
-	DMM::Motor motors[7];
+}
+
+DMM::Motor::~Motor()
+{
+}
 
 void DMM::sendPackage(unsigned char packageLength, unsigned char B[8])
 {
-	//cSerial.write(B, packageLength);
+	serialPts[1]->write(B, packageLength);
+	serialPts[2]->write(B, packageLength);
 
+	/* Output */
+	pt();
 	cout << "Output: ";
 	for (int i = 0; i < packageLength; i++) {
-		cout << "0x" << std::hex << (int)B[i] << " ";
+		cout << "0x" << std::hex << (int)B[i] << std::dec << " ";
 	}
 	cout << endl;
 }
 
-void DMM::readPackages()
+void DMM::readPackages(serial::Serial& cSerial)
 {
 	/* Check if data is available */
 	while (cSerial.available()) {
@@ -107,10 +149,19 @@ void DMM::readPackages()
 			packageLength = 4 + ((B[1] >> 5) & 0x03);	// 1LLFFFFF
 			
 			/* Read reamining bytes */
-			cSerial.read(B + 2, packageLength - 2);
+			cSerial.read(&B[2], packageLength - 2);
 
 			/* Continue if checksum is correct */
 			if ( (NotStartBit | calcCRC(packageLength, B)) == B[packageLength - 1]) {
+				
+				/* Output */
+				pt();
+				cout << "Input: ";
+				for (int i = 0; i < packageLength; i++) {
+					cout << "0x" << std::hex << (int)B[i] << std::dec << " ";
+				}
+				cout << endl;
+
 				interpretPackage(packageID, packageLength, B);
 			}
 		}
@@ -127,67 +178,70 @@ void DMM::interpretPackage(unsigned char ID, unsigned char packageLength, unsign
 	case Is_MainGain:
 		//motors[ID].mainGain = B[2] & 0x7f;
 		//motors[ID].mainGain_readFlag = 0x00;
-		cout << "M" << ID << " Is_MainGain=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_MainGain=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_SpeedGain:
 		//motors[ID].speedGain = B[2] & 0x7f;
 		//motors[ID].speedGain_readFlag = 0x00;
-		cout << "M" << ID << " Is_SpeedGain=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_SpeedGain=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_IntGain:
 		//motors[ID].intGain = B[2] & 0x7f;
 		//motors[ID].intGain_readFlag = 0x00;
-		cout << "M" << ID << " Is_IntGain=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_IntGain=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_TrqCons:
 		//motors[ID].torqueConst = B[2] & 0x7f;
 		//motors[ID].torqueConst_readFlag = 0x00;
-		cout << "M" << ID << " Is_TrqCons=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_TrqCons=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_HighSpeed:
 		//motors[ID].speedLimit = B[2] & 0x7f;
 		//motors[ID].speedLimit_readFlag = 0x00;
-		cout << "M" << ID << " Is_MainGain=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_MainGain=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_HighAccel:
 		//motors[ID].accelLimit = B[2] & 0x7f;
 		//motors[ID].accelLimit_readFlag = 0x00;
-		cout << "M" << ID << " Is_HighAccel=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_HighAccel=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_Drive_ID:
 		//motors[ID].ID = B[2] & 0x7f;
 		//motors[ID].ID_readFlag = 0x00;
-		cout << "M" << ID << " Is_Drive_ID=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_Drive_ID=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_PosOn_Range:
 		motors[ID].posOnRange = B[2] & 0x7f;
 		motors[ID].posOnRange_readFlag = 0x00;
-		cout << "M" << ID << " Is_PosOn_Range=" << (B[2] & 0x7f) << endl;
+
+		/* Output */
+		pt();
+		cout << 'm' << (int)ID << " Is_PosOn_Range=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_GearNumber:
 		//motors[ID].gearN = ((B[2] & 0x007f) << 7) + (B[3] & 0x007f);
 		//motors[ID].gearN_readFlag = 0x00;
-		cout << "M" << ID << " Is_GearNumber=" << (((B[2] & 0x007f) << 7) + (B[3] & 0x007f)) << endl;
+		cout << 'm' << (int)ID << " Is_GearNumber=" << (((B[2] & 0x007f) << 7) + (B[3] & 0x007f)) << endl;
 		break;
 	case Is_Status:
 
 		//motors[ID].status_readFlag = 0x00;
-		cout << "M" << ID << " Is_Status=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_Status=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_Config:
 
 		//motors[ID].config_readFlag = 0x00;
-		cout << "M" << ID << " Is_Config=" << (B[2] & 0x7f) << endl;
+		cout << 'm' << (int)ID << " Is_Config=" << (B[2] & 0x7f) << endl;
 		break;
 	case Is_AbsPos32:
 		//motors[ID].absPosition = calcSignedValue(packageLength, B);
 		//motors[ID].absPosition_readFlag = 0x00;
-		cout << "M" << ID << " Is_AbsPos32=" << DMM::calcSignedValue(packageLength, B) << endl;
+		cout << 'm' << (int)ID << " Is_AbsPos32=" << DMM::calcSignedValue(packageLength, B) << endl;
 		break;
 	case Is_TrqCurrent:
 		//motors[ID].torqueCurrent = calcSignedValue(packageLength, B);
 		//motors[ID].torqueCurrent_readFlag = 0x00;
-		cout << "M" << ID << " Is_TrqCurrent=" << DMM::calcSignedValue(packageLength, B) << endl;
+		cout << 'm' << (int)ID << " Is_TrqCurrent=" << DMM::calcSignedValue(packageLength, B) << endl;
 		break;
 	default:;
 	}
@@ -255,6 +309,10 @@ void DMM::goAbsolutePos(unsigned char ID, int pos) {
 	/* Send packet */
 	sendPackage(packageLength, B);
 
+	/* Output */
+	pt();
+	cout << 'm' << (int)ID << " goAbsolutePos=" << pos << endl;
+
 }
 
 void DMM::makeLinearLine(unsigned char ID, int pos) {
@@ -295,6 +353,10 @@ void DMM::goRelativePos(unsigned char ID, int pos) {
 
 	/* Send packet */
 	sendPackage(packageLength, B);
+
+	/* Output */
+	pt();
+	cout << 'm' << (int)ID << " goRelativePos=" << pos << endl;
 }
 
 void DMM::makeCircularArc(unsigned char ID, int pos) {
@@ -503,6 +565,9 @@ void DMM::readPosition(unsigned char ID) {
 	/* Send packet */
 	sendPackage(packageLength, B);
 
+	/* Output */
+	pt();
+	cout << 'm' << (int)ID << " readPosition" << endl;
 }
 
 void DMM::readTorqueCurrent(unsigned char ID) {
@@ -521,6 +586,9 @@ void DMM::readTorqueCurrent(unsigned char ID) {
 	/* Send packet */
 	sendPackage(packageLength, B);
 
+	/* Output */
+	pt();
+	cout << 'm' << (int)ID << " readPosition" << endl;
 }
 
 void DMM::setMainGain(unsigned char ID, unsigned char gain) {
@@ -795,6 +863,9 @@ void DMM::readPosOnRange(unsigned char ID) {
 	/* Update motor flag */
 	motors[ID].posOnRange_readFlag = 0x01;
 
+	/* Output */
+	pt();
+	cout << 'm' << (int)ID << " read_Pos_OnRange" << endl;
 }
 
 void DMM::readGearNumber(unsigned char ID) {
@@ -867,38 +938,76 @@ void DMM::isTorqueCurrent()
 {
 }
 
-int main() {
+void test(string port1, string port2) {
 	
 	// Connect to Serial
+	//serials.insert(std::make_pair(1, new serial::Serial(port2, 38400, serial::Timeout::simpleTimeout(1000))));
+	serialPts[1] = new serial::Serial(port1, 38400, serial::Timeout::simpleTimeout(1000));
+	serialPts[2] = new serial::Serial(port2, 38400, serial::Timeout::simpleTimeout(1000));
+
+	
+
+	pt();
+	cout << "Testing started" << endl;
+	//
+
+	// Initialize motors
+	//motors[0] = DMM::Motor(0);
+	//motors[1] = DMM::Motor(1);
+	//motors[2] = DMM::Motor(2);
+
+	motors[1] = DMM::Motor(1, 1);
+	motors[2] = DMM::Motor(2, 2);
+	cout << 'm' << (int)motors[1].ID << " posOnRange_readFlag=" << (int)motors[1].posOnRange_readFlag << endl;
+	cout << 'm' << (int)motors[2].ID << " posOnRange_readFlag=" << (int)motors[2].posOnRange_readFlag << endl;
+
+
 
 	while (true) {
 
-		// Initialize motors
-		motors[1] = DMM::Motor(1);
-		motors[2] = DMM::Motor(2);
-
 		// Instruct motor 1 to move
 		DMM::goRelativePos(1, 100);
+		DMM::readPosOnRange(1);
 
 		// Read positions of motors 1 and 2 until motor 1 is on range
-		while (!motors[1].posOnRange_readFlag && motors[1].posOnRange) {
+		while (motors[1].posOnRange_readFlag || motors[1].posOnRange) {
 			DMM::readPosition(1);
 			DMM::readPosition(2);
 			DMM::readPosOnRange(1);
 
-			DMM::readPackages();
+			DMM::readPackages(*serialPts[1]);
+			DMM::readPackages(*serialPts[2]);
 		}
 
 		// Instruct motor 1 to move back
 		DMM::goRelativePos(1, -100);
+		DMM::readPosOnRange(1);
 
 		// Read positions of motors 1 and 2 until motor 1 is on range
-		while (!motors[1].posOnRange_readFlag && motors[1].posOnRange) {
+		while (motors[1].posOnRange_readFlag || motors[1].posOnRange) {
 			DMM::readPosition(1);
 			DMM::readPosition(2);
 			DMM::readPosOnRange(1);
 
-			DMM::readPackages();
+			DMM::readPackages(*serialPts[1]);
+			DMM::readPackages(*serialPts[2]);
 		}
 	}
+}
+
+void pt() {
+	time_t t = time(0);   // get time now
+	struct tm * now = localtime(&t);
+	cout << (now->tm_year + 1900) << '-'
+		<< (now->tm_mon + 1) << '-'
+		<< now->tm_mday << ' '
+		<< now->tm_hour << ':'
+		<< now->tm_min << ':'
+		<< now->tm_sec << ' ';
+}
+
+using namespace std::chrono;
+void ptm() {
+	milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+	cout << ms.count() << ' ';
 }
