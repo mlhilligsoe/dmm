@@ -352,3 +352,59 @@ int main(int argc, char **argv) {
 
 
 
+void test(string port1, string port2) {
+
+	// Connect to Serial
+	//serials.insert(std::make_pair(1, new serial::Serial(port2, 38400, serial::Timeout::simpleTimeout(1000))));
+	serialPts[1] = new serial::Serial(port1, 38400, serial::Timeout::simpleTimeout(1000));
+	serialPts[2] = new serial::Serial(port2, 38400, serial::Timeout::simpleTimeout(1000));
+
+
+
+	pt();
+	cout << "Testing started" << endl;
+	//
+
+	// Initialize motors
+	//motors[0] = DMM::Motor(0);
+	//motors[1] = DMM::Motor(1);
+	//motors[2] = DMM::Motor(2);
+
+	motors[1] = DMM::Motor(1, 1);
+	motors[2] = DMM::Motor(2, 2);
+	cout << 'm' << (int)motors[1].ID << " posOnRange_readFlag=" << (int)motors[1].posOnRange_readFlag << endl;
+	cout << 'm' << (int)motors[2].ID << " posOnRange_readFlag=" << (int)motors[2].posOnRange_readFlag << endl;
+
+
+
+	while (true) {
+
+		// Instruct motor 1 to move
+		DMM::goRelativePos(1, 100);
+		DMM::readPosOnRange(1);
+
+		// Read positions of motors 1 and 2 until motor 1 is on range
+		while (motors[1].posOnRange_readFlag || motors[1].posOnRange) {
+			DMM::readPosition(1);
+			DMM::readPosition(2);
+			DMM::readPosOnRange(1);
+
+			DMM::readPackages(*serialPts[1]);
+			DMM::readPackages(*serialPts[2]);
+		}
+
+		// Instruct motor 1 to move back
+		DMM::goRelativePos(1, -100);
+		DMM::readPosOnRange(1);
+
+		// Read positions of motors 1 and 2 until motor 1 is on range
+		while (motors[1].posOnRange_readFlag || motors[1].posOnRange) {
+			DMM::readPosition(1);
+			DMM::readPosition(2);
+			DMM::readPosOnRange(1);
+
+			DMM::readPackages(*serialPts[1]);
+			DMM::readPackages(*serialPts[2]);
+		}
+	}
+}
