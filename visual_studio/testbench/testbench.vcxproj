@@ -149,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\testbench\testbench.cpp" />
-    <ClCompile Include="testbench2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\testbench\testbench.h" />

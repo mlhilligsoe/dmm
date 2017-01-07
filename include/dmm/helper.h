@@ -1,9 +1,11 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include <string>
 
+using std::string;
 
-	void pt();
-	void ptm();
+	string pt();
+	string ptm();
 
 #endif

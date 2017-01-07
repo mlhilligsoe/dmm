@@ -8,7 +8,7 @@ namespace DMM {
 		unsigned char ID = 127;
 		unsigned char mainGain, speedGain, intGain, torqueConst, speedLimit, accelLimit, posOnRange = 0;
 		unsigned short gearN = 0;
-		unsigned char statusOnRange, statusServoMode, statusAlarm, statusMotion, statusPin2JP3 = 0;
+		unsigned char statusOnPosition, statusServoMode, statusAlarm, statusMotion, statusPin2JP3 = 0;
 		unsigned char cmdMode, moveMode, servoMode, active = 0;
 		int absPosition, torqueCurrent = 0;
 
@@ -18,16 +18,17 @@ namespace DMM {
 		unsigned char status_readFlag = 0;
 		unsigned char config_readFlag = 0;
 		unsigned char absPosition_readFlag, torqueCurrent_readFlag = 0;
-		
-		unsigned char sID;
+
+		serial::Serial* sID;
 
 		/* Constructor */
-		Motor(const unsigned char id, const unsigned char sid);
+		Motor(const unsigned char id, serial::Serial* sid);
 		Motor();
 		~Motor();
 
 
 	};
+}
 
 #endif
 

@@ -15,9 +15,6 @@
     <ClCompile Include="..\..\src\testbench\testbench.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testbench2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\testbench\testbench.h">

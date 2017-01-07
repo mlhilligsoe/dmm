@@ -1,25 +1,2 @@
-﻿  testbench2.cpp
-c:\users\morten hilligsøe\source\repos\dmm\visual_studio\testbench\testbench2.cpp(34): error C2660: 'DMM::goRelativePos': function does not take 1 arguments
-c:\users\morten hilligsøe\source\repos\dmm\visual_studio\testbench\testbench2.cpp(37): error C2451: conditional expression of type 'void' is illegal
-  c:\users\morten hilligsøe\source\repos\dmm\visual_studio\testbench\testbench2.cpp(37): note: Expressions of type void cannot be converted to other types
-c:\users\morten hilligsøe\source\repos\dmm\visual_studio\testbench\testbench2.cpp(46): error C2451: conditional expression of type 'void' is illegal
-  c:\users\morten hilligsøe\source\repos\dmm\visual_studio\testbench\testbench2.cpp(46): note: Expressions of type void cannot be converted to other types
-  testbench.cpp
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(57): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(89): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(89): error C3861: 'Get_Function': identifier not found
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(97): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(116): error C3861: 'Cal_SignValue': identifier not found
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(120): error C3861: 'Cal_SignValue': identifier not found
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(124): error C3861: 'Cal_SignValue': identifier not found
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(132): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(160): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(201): error C3861: 'Make_CRC_Send': identifier not found
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(205): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(225): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(241): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(256): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(262): error C2653: 'DlgRun': is not a class or namespace name
-c:\users\morten hilligsøe\source\repos\dmm\src\testbench\testbench.cpp(334): error C2039: 'ReadMotorPosition32': is not a member of 'DMM'
-  c:\users\morten hilligsøe\source\repos\dmm\include\dmm\dmm.h(6): note: see declaration of 'DMM'
-  Generating Code...
+﻿  testbench.vcxproj -> C:\Users\Morten Hilligsøe\Source\Repos\dmm\visual_studio\Debug\testbench.exe
+  testbench.vcxproj -> C:\Users\Morten Hilligsøe\Source\Repos\dmm\visual_studio\Debug\testbench.pdb (Full PDB)

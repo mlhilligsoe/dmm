@@ -1,24 +1,2 @@
-﻿  dmm.cpp
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(82): error C2530: 'DMM::Motor::mSerial': references must be initialized
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(103): error C2248: 'serial::Serial::operator =': cannot access private member declared in class 'serial::Serial'
-  c:\users\morten hilligsøe\source\repos\dmm\include\serial\serial.h(651): note: see declaration of 'serial::Serial::operator ='
-  c:\users\morten hilligsøe\source\repos\dmm\include\serial\serial.h(147): note: see declaration of 'serial::Serial'
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(108): error C2530: 'DMM::Motor::mSerial': references must be initialized
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(132): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(132): error C2228: left of '.available' must have class/struct/union
-  c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(132): note: type is 'unknown-type'
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(137): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(137): error C2228: left of '.read' must have class/struct/union
-  c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(137): note: type is 'unknown-type'
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(137): error C2228: left of '.at' must have class/struct/union
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(145): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(145): error C2228: left of '.read' must have class/struct/union
-  c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(145): note: type is 'unknown-type'
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(145): error C2228: left of '.at' must have class/struct/union
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(149): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(149): error C2228: left of '.read' must have class/struct/union
-  c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(149): note: type is 'unknown-type'
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(950): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(951): error C2065: 'cSerial': undeclared identifier
-c:\users\morten hilligsøe\source\repos\dmm\src\dmm\dmm.cpp(989): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\time.h(505): note: see declaration of 'localtime'
+﻿  comm.cpp
+  dmm.vcxproj -> C:\Users\Morten Hilligsøe\Source\Repos\dmm\visual_studio\Debug\dmm.lib

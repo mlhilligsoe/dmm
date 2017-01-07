@@ -1,67 +1,47 @@
-#ifndef DMM_H
-#define DMM_H
+#ifndef DMM_COMM_H
+#define DMM_COMM_H
+
+#include <map>
 
 #include "serial\serial.h"
+#include "dmm\motor.h"
+
+using std::map;
 
 namespace DMM {
 
-	serial::Serial cSerial;
-
-	void sendPackage(unsigned char packageLength, unsigned char B[8]);
-	void readPackages(serial::Serial& cSerial);
-	void interpretPackage(unsigned char packageID, unsigned char packageLength, unsigned char B[8]);
+	void sendPackage(Motor& motor, unsigned char packageLength, unsigned char B[8]);
+	void readPackages(serial::Serial& cSerial, map<unsigned char, Motor*> motors);
+	void interpretPackage(Motor& motor, unsigned char packageLength, unsigned char B[8]);
 	unsigned char calcCRC(unsigned char packageLength, unsigned char B[8]);
 	long calcSignedValue(unsigned char packageLength, unsigned char B[8]);
 	
 	
 	/* Drive input functions */
-	void setOrigin(unsigned char ID);
-	void goAbsolutePos(unsigned char ID, int pos);
-	void makeLinearLine(unsigned char ID, int line);
-	void goRelativePos(unsigned char ID, int pos);
-	void makeCircularArc(unsigned char ID, int pos);
-	void assignDriveID(unsigned char ID, unsigned char id);
-	void readDriveID(unsigned char ID);
-	void setDriveConfig(unsigned char ID, unsigned char cmdMode, unsigned char moveMode, unsigned char servoMode, unsigned char active);
-	void readDriveConfig(unsigned char ID);
-	void readDriveStatus(unsigned char ID);
-	void turnConstSpeed(unsigned char ID, int speed);
-	void squareWave(unsigned char ID, int amplitude);
-	void sinWave(unsigned char ID, int amplitude);
-	void setFrequency(unsigned char ID, int frequency);
-	void readPosition(unsigned char ID);
-	void readTorqueCurrent(unsigned char ID);
-	void setMainGain(unsigned char ID, unsigned char gain);
-	void setSpeedGain(unsigned char ID, unsigned char gain);
-	void setIntGain(unsigned char ID, unsigned char gain);
-	void setTorqueCons(unsigned char ID, unsigned char constant);
-	void setSpeedLimit(unsigned char ID, unsigned char speed);
-	void SetAccelLimit(unsigned char ID, unsigned char accel);
-	void setPosOnRange(unsigned char ID, unsigned char range);
-	void setGearNumber(unsigned char ID, unsigned short gearN);
-	void readMainGain(unsigned char ID);
-	void readSpeedGain(unsigned char ID);
-	void readIntGain(unsigned char ID);
-	void readTorqueCons(unsigned char ID);
-	void readSpeedLimit(unsigned char ID);
-	void readAccelLimit(unsigned char ID);
-	void readPosOnRange(unsigned char ID);
-	void readGearNumber(unsigned char ID);
-
+	void setOrigin(Motor& motor);
+	void goAbsolutePos(Motor& motor, int pos);
+	void goRelativePos(Motor& motor, int pos);
+	void readDriveID(Motor& motor);
+	void setDriveConfig(Motor& motor, unsigned char cmdMode, unsigned char moveMode, unsigned char servoMode, unsigned char active);
+	void readDriveConfig(Motor& motor);
+	void readDriveStatus(Motor& motor);
+	void turnConstSpeed(Motor& motor, int speed);
+	void readPosition(Motor& motor);
+	void readTorqueCurrent(Motor& motor);
+	void setMainGain(Motor& motor, unsigned char gain);
+	void setSpeedGain(Motor& motor, unsigned char gain);
+	void setIntGain(Motor& motor, unsigned char gain);
+	void setTorqueCons(Motor& motor, unsigned char constant);
+	void setSpeedLimit(Motor& motor, unsigned char speed);
+	void setAccelLimit(Motor& motor, unsigned char accel);
+	void setGearNumber(Motor& motor, unsigned short gearN);
+	
 	/* Drive output functions */
-	void isMainGain(unsigned char mID, unsigned char B[8]);
-	void isSpeedGain(unsigned char mID, unsigned char B[8]);
-	void isIntGain(unsigned char mID, unsigned char B[8]);
-	void isTorqueCons(unsigned char mID, unsigned char B[8]);
-	void isSpeedLimit(unsigned char mID, unsigned char B[8]);
-	void isAccelLimit(unsigned char mID, unsigned char B[8]);
-	void isDriveID(unsigned char mID, unsigned char B[8]);
-	void isPosOnRange(unsigned char mID, unsigned char B[8]);
-	void isGearNumber(unsigned char mID, unsigned char B[8]);
-	void isStatus(unsigned char mID, unsigned char B[8]);
-	void isConfig(unsigned char mID, unsigned char B[8]);
-	void isAbsPosition(unsigned char mID, unsigned char B[8]);
-	void isTorqueCurrent(unsigned char mID, unsigned char B[8]);
+	void isDriveID(Motor& motor, unsigned char B[8]);
+	void isStatus(Motor& motor, unsigned char B[8]);
+	void isConfig(Motor& motor, unsigned char B[8]);
+	void isAbsPosition(Motor& motor, unsigned char packageLength, unsigned char B[8]);
+	void isTorqueCurrent(Motor& motor, unsigned char packageLength, unsigned char B[8]);
 }
 
 
