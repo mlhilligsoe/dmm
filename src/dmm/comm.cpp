@@ -315,7 +315,7 @@ namespace DMM {
 
 	void readPosition(Motor& motor) {
 
-		if (!motor.absPosition_readFlag) {
+		//if (!motor.absPosition_readFlag) {
 			/* Define package parameters */
 			unsigned char packageLength = 4;
 			unsigned char functionCode = General_Read;
@@ -330,10 +330,13 @@ namespace DMM {
 			/* Send packet */
 			sendPackage(motor, packageLength, B);
 
+			/* Set flag */
+			motor.absPosition_readFlag = 0x01;
+
 			/* Output */
 			if (INFO)
 				cout << pt() << " m" << (int)motor.ID << " >> Read_Position" << endl;
-		}
+		//}
 	}
 
 	void readTorqueCurrent(Motor& motor) {
@@ -542,9 +545,12 @@ namespace DMM {
 
 	void isAbsPosition(Motor& motor, unsigned char packageLength, unsigned char B[8])
 	{
+		if (!motor.absPosition_readFlag == 0x00)
+			++motor.count;
+		
 		motor.absPosition = calcSignedValue(packageLength, B);
 		motor.absPosition_readFlag = 0x00;
-
+		
 		/* Output */
 		if (INFO)
 			cout << pt() << " m" << (int)motor.ID << " << Is_AbsPos32=" << motor.absPosition << endl;

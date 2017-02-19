@@ -20,6 +20,7 @@ namespace DMM {
 		unsigned char absPosition_readFlag, torqueCurrent_readFlag = 0;
 
 		serial::Serial* sID;
+		int count = 0;
 
 		/* Constructor */
 		Motor(const unsigned char id, serial::Serial* sid);
